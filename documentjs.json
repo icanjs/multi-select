@@ -1,0 +1,7 @@
+{
+    "sites": {
+        "docs": {
+            "glob": "{_docs,src}/**/*.{js,md}"
+        }
+    }
+}

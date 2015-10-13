@@ -1,0 +1,27 @@
+<!-- The template to be demonstrated/tested -->
+<script type="text/stache" id="demo" can-autorender>
+  <can-import from="multi-select" />
+
+  <multi-select list="{first}"></multi-select>
+  <multi-select list="{second}"></multi-select>
+
+</script>
+
+<!-- The data for the above template. -->
+<script src='../node_modules/steal/steal.js'
+        main="can/view/autorender/">
+
+  import can from "can";
+  import $ from "jquery";
+
+  $("#demo").viewModel().attr({
+    first:[1, 2, 3],
+    second: [
+      {'value': 1, 'text': 'First'},
+      {'value': 2, 'text': 'Second'},
+      {'value': 3, 'text': 'Third'},
+      {'value': 4, 'text': 'Fourth'},
+      {'value': 5, 'text': 'Fifth'}
+    ]
+  });
+</script>

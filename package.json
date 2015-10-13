@@ -1,0 +1,46 @@
+{
+  "name": "multi-select",
+  "version": "0.0.1",
+  "description": "A multi-select component for CanJS",
+  "main": "src/multi-select.js",
+  "scripts": {
+    "release:patch": "npm version patch && npm publish",
+    "release:minor": "npm version minor && npm publish",
+    "release:major": "npm version major && npm publish",
+    "jshint": "jshint src/. --config",
+    "testee": "testee test.html --browsers firefox",
+    "test": "npm run jshint && npm run testee",
+    "build": "node build.js"
+  },"repository": {
+    "type": "git",
+    "url": "https://marshallswain@github.com/marshallswain/multi-select.git"
+  },
+  "keywords": [
+    "CanJS",
+    "Stache"
+  ],
+  "author": "Marshall Thompson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marshallswain/multi-select/issues"
+  },
+  "homepage": "https://github.com/marshallswain/multi-select",
+  "system": {
+    "main": "multi-select",
+    "npmIgnore": [
+      "documentjs",
+      "devDependencies"
+    ],
+    "transpiler": "babel",
+    "directories": {
+      "lib": "src"
+    }
+  },
+  "dependencies": {
+    "can": "^2.3.0-beta.5"
+  },
+  "devDependencies": {
+    "steal": "^0.12.0-pre.10",
+    "steal-tools": "^0.12.0-pre.5"
+  }
+}
