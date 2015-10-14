@@ -7,6 +7,10 @@ can.Component.extend({
   tag: 'multi-select',
   template: template,
   viewModel: VM,
-  helpers:{},
-  events:{}
+  helpers:{
+    isSelected(pos){
+      pos = typeof pos === 'function' ? pos() : pos;
+      return this.isItemSelected(pos) ? 'checked' : '';
+    }
+  }
 });

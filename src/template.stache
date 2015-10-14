@@ -1,23 +1,28 @@
-<select id="example-getting-started" multiple="multiple" >
-{{#each list}}
-  {{#if ./text}}
-    <option value="{{value}}">{{text}}</option>
-  {{else}}
-    <option value="{{.}}">{{.}}</option>
-  {{/if}}
-{{/each}}
-</select>
-
 <div class="btn-group open">
-  <button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected" aria-expanded="true">
-    <span class="multiselect-selected-text">None selected</span> <b class="caret"></b>
+  <button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected" aria-expanded="true"
+      can-click="{toggle}">
+    <span class="multiselect-selected-text">
+      {{#if selected.length}}
+        {{#eq selected.length 1}}
+          {{#if selected.0.text}} {{selected.0.text}} {{else}} {{selected.0}} {{/if}}
+        {{else}} {{selected.length}} selected {{/eq}}
+      {{else}}
+        None selected
+      {{/if}}
+    </span> <b class="caret"></b>
   </button>
+
+  {{#if isOpened}}
   <ul class="multiselect-container dropdown-menu">
-    <li class=""><a tabindex="0"><label class="checkbox"><input type="checkbox" value="cheese"> Cheese</label></a> </li>
-    <li class=""><a tabindex="0"><label class="checkbox"><input type="checkbox" value="tomatoes"> Tomatoes</label></a></li>
-    <li class=""><a tabindex="0"><label class="checkbox"><input type="checkbox" value="Mozzarella"> Mozzarella</label></a></li>
-    <li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="Mushrooms"> Mushrooms</label></a></li>
-    <li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="Pepperoni"> Pepperoni</label></a></li>
-    <li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="Onions"> Onions</label></a></li>
+    {{#each list}}
+      <li class="">
+        <a tabindex="0">
+          <label class="checkbox">
+            <input type="checkbox" {{isSelected @index}} can-click="{select .}">{{#if text}} {{text}} {{else}} {{.}} {{/if}}
+          </label>
+        </a>
+      </li>
+    {{/each}}
   </ul>
+  {{/if}}
 </div>
