@@ -38,6 +38,7 @@
     }
   },
   "dependencies": {
+    "bootstrap": "^3.3.5",
     "can": "^2.2.0",
     "jquery": "^2.1.4"
   },
