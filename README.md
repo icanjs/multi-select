@@ -28,6 +28,7 @@ Pull requests are welcome.
 ## Author
 
 - [Marshall Thompson](https://github.com/marshallswain)
+- [Ilya Fadeev](https://github.com/ilyavf)
 
 [![Built with StealJS](./dist/build-with-stealjs.jpg)](http://StealJS.com)
 
