@@ -13,7 +13,7 @@
     <span class="multiselect-selected-text">None selected</span> <b class="caret"></b>
   </button>
   <ul class="multiselect-container dropdown-menu">
-    <li class=""> <a tabindex="0"><label class="checkbox"><input type="checkbox" value="cheese"> Cheese</label></a> </li>
+    <li class=""><a tabindex="0"><label class="checkbox"><input type="checkbox" value="cheese"> Cheese</label></a> </li>
     <li class=""><a tabindex="0"><label class="checkbox"><input type="checkbox" value="tomatoes"> Tomatoes</label></a></li>
     <li class=""><a tabindex="0"><label class="checkbox"><input type="checkbox" value="Mozzarella"> Mozzarella</label></a></li>
     <li><a tabindex="0"><label class="checkbox"><input type="checkbox" value="Mushrooms"> Mushrooms</label></a></li>
