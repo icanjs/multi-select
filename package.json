@@ -11,7 +11,8 @@
     "testee": "testee test.html --browsers firefox",
     "test": "npm run jshint && npm run testee",
     "build": "node build.js"
-  },"repository": {
+  },
+  "repository": {
     "type": "git",
     "url": "https://marshallswain@github.com/marshallswain/multi-select.git"
   },
@@ -37,7 +38,8 @@
     }
   },
   "dependencies": {
-    "can": "^2.3.0-beta.5"
+    "can": "^2.2.0",
+    "jquery": "^2.1.4"
   },
   "devDependencies": {
     "steal": "^0.12.0-pre.10",
