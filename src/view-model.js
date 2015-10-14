@@ -4,16 +4,29 @@ import 'can/map/define/';
 let VM = can.Map.extend({
   define: {
     /**
-     * List of items for select options
+     * Source list of items for select options passed from parent context.
      */
     list: {
       value: []
     },
     /**
-     * List contains selected items of this.list
+     * Internal list of items for select options
+     */
+    _list: {
+      value: []
+    },
+    /**
+     * List contains selected items of this._list
      */
     selected: {
-      value: []
+      get(){
+        return this.attr('_list').filter(item => item.attr('isSelected'));
+      }
+    },
+    selectedValues: {
+      get(){
+        return [].map.call(this.attr('selected'), function(item){ return item.value});
+      }
     },
     /**
      * Flag to show/hide list of items
@@ -24,20 +37,17 @@ let VM = can.Map.extend({
     }
   },
   select(item){
-    var pos = this.selected.indexOf(item);
-    if (pos === -1){
-      this.selected.push(item);
-    } else {
-      this.selected.splice(pos, 1);
-    }
+    item.attr('isSelected', !item.attr('isSelected'));
   },
   toggle(){
     this.attr('isOpened', !this.attr('isOpened'));
   },
-  isItemSelected(pos){
-    pos = typeof pos === 'function' ? pos() : pos;
-    var item = this.list[pos];
-    return this.attr('selected').indexOf(item) !== -1;
+  initList(items){
+    if (items){
+      this.attr('_list').replace(items);
+    } else if (this.attr('list.length')) {
+      [].push.apply(this.attr('_list'), this.attr('list'));
+    }
   }
 });
 

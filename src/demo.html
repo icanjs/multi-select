@@ -2,16 +2,26 @@
 <script type="text/stache" id="demo" can-autorender>
   <can-import from="multi-select" />
 
-  <multi-select list="{first}" selected="{selected1}"></multi-select>
-  {{#each selected1}}
+  <!--<multi-select list="{first}" selected="{selected1}"></multi-select>-->
+  <!--{{#each selected1}}-->
+    <!--{{.}},-->
+  <!--{{/each}}-->
+
+  <!--<br/><br/>-->
+
+  <!--<multi-select list="{second}" selected="{selected2}"></multi-select>-->
+  <!--{{#each selected2}}-->
+    <!--{{text}},-->
+  <!--{{/each}}-->
+
+  <multi-select selected-values="{selected}">
+    {{#each second}}
+    <option value="{{value}}">{{text}}</option>
+    {{/each}}
+  </multi-select>
+
+  {{#each selected}}
     {{.}},
-  {{/each}}
-
-  <br/><br/>
-
-  <multi-select list="{second}" selected="{selected2}"></multi-select>
-  {{#each selected2}}
-    {{text}},
   {{/each}}
 
 </script>
@@ -32,6 +42,7 @@
       {'value': 4, 'text': 'Fourth'},
       {'value': 5, 'text': 'Fifth'}
     ],
+    selected: [],
     selected1: [],
     selected2: []
   });

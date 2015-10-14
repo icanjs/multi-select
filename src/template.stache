@@ -1,3 +1,6 @@
+<content></content>
+
+{{#if _list}}
 <div class="btn-group open">
   <button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected" aria-expanded="true"
       can-click="{toggle}">
@@ -14,11 +17,11 @@
 
   {{#if isOpened}}
   <ul class="multiselect-container dropdown-menu">
-    {{#each list}}
+    {{#each _list}}
       <li class="">
         <a tabindex="0">
           <label class="checkbox">
-            <input type="checkbox" {{isSelected @index}} can-click="{select .}">{{#if text}} {{text}} {{else}} {{.}} {{/if}}
+            <input type="checkbox" {{#if isSelected}}checked{{/if}} can-click="{select .}">{{#if text}} {{text}} {{else}} {{.}} {{/if}}
           </label>
         </a>
       </li>
@@ -26,3 +29,4 @@
   </ul>
   {{/if}}
 </div>
+{{/if}}

@@ -7,10 +7,14 @@ can.Component.extend({
   tag: 'multi-select',
   template: template,
   viewModel: VM,
-  helpers:{
-    isSelected(pos){
-      pos = typeof pos === 'function' ? pos() : pos;
-      return this.isItemSelected(pos) ? 'checked' : '';
+  events: {
+    inserted(el, ev){
+      console.log('inserted', el);
+      this.viewModel.initList(el.find('option').map(function(i, el){
+        var $el = $(el);
+        return {value: $el.val(), text: $el.text()};
+      }));
+      // TODO: https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
     }
   }
 });
