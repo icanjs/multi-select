@@ -1,22 +1,46 @@
 <!-- The template to be demonstrated/tested -->
 <script type="text/stache" id="demo" can-autorender>
   <can-import from="multi-select" />
+  <can-import from="bootstrap/dist/css/bootstrap.css!" />
 
   <!--<multi-select selected-values="{selected2}" list="{list}" value-prop="value" text-prop="text"></multi-select>-->
   <!--{{#each selected2}}-->
     <!--{{.}},-->
   <!--{{/each}}-->
 
-  <multi-select selected-values="{selected}">
+<div class="col-sm-3">
+  <div>
+    Selected Items: 
+    {{#each selectedItems}}
+      {{.}},
+    {{/each}}
+  </div>
+  
+  <multi-select selected-values="{selectedItems}">
     {{#each items}}
       <option value="{{value}}">{{text}}</option>
     {{/each}}
-  </multi-select>
+  </multi-select>  
+</div>
 
-  {{#each selected}}
-    {{.}},
-  {{/each}}
+<div class="col-sm-3">
+  <div>
+    Selected Things: 
+    {{#each selectedThings}}
+      {{.}},
+    {{/each}}
+  </div>
+  
+  <multi-select selected-values="{selectedThings}">
+    <option value="-1">All</option>
+    {{#each things}}
+      <option value="{{value}}">{{text}}</option>
+    {{/each}}
+  </multi-select>  
+</div>
 
+
+  
 </script>
 
 <!-- The data for the above template. -->
@@ -34,6 +58,14 @@
       {'value': 4, 'text': 'Fourth'},
       {'value': 5, 'text': 'Fifth'}
     ],
-    selected: []
+    selectedItems: [],
+    things: [
+      {'value': 1, 'text': 'Thing 1'},
+      {'value': 2, 'text': 'Thing 2'},
+      {'value': 3, 'text': 'Thing 3'},
+      {'value': 4, 'text': 'Thing 4'},
+      {'value': 5, 'text': 'Thing 5'}
+    ],
+    selectedThings: []
   });
 </script>
