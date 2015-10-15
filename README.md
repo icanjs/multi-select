@@ -13,7 +13,18 @@ Using CanJS's built-in support for StealJS, you can now import the module direct
 ```html
 <can-import from="multi-select"/>
 
-<multi-select items="{items}"></multi-select>
+<multi-select select-all>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</multi-select>
+
+<multi-select select-all selected="{selectedItems}" are-all-selected="{areAllSelected}">
+  {{#each items}}
+    <option value="{{value}}">{{text}}</option>
+  {{/each}}
+</multi-select>
+
 ```
 
 ## Usage
