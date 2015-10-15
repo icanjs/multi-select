@@ -20,7 +20,7 @@
   {{#if isOpened}}
   <ul class="multiselect-container dropdown-menu">
     {{#if selectAll}}
-      <li class="">
+      <li class="{{#if areAllSelected}}checked{{/if}}">
         <a tabindex="-1">
           <label class="checkbox">
             <input type="checkbox" can-value="{areAllSelected}">{{selectAllText}}
@@ -29,7 +29,7 @@
       </li>
     {{/if}}
     {{#each _list}}
-      <li class="">
+      <li class="{{#if isSelected}}checked{{/if}}">
         <a tabindex="{{@index}}">
           <label class="checkbox">
             <input type="checkbox" {{#if isSelected}}checked{{/if}} can-click="{select .}">{{#if text}} {{text}} {{else}} {{.}} {{/if}}
