@@ -28,6 +28,9 @@ export const VM = can.Map.extend({
         return this.attr('_list.length') === this.attr('selected.length');
       },
       set(val){
+        if (!this.attr('_list.length')){
+          return val;
+        }
         can.batch.start();
         this.attr('_list').each(item => {
           item.attr('isSelected', val);
