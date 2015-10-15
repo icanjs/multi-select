@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.5",
-    "can": "^2.2.0",
+    "can": "*",
     "jquery": "^2.1.4"
   },
   "devDependencies": {
