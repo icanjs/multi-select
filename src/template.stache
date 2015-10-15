@@ -1,4 +1,6 @@
-<content></content>
+<div class="orig-options">
+  <content></content>
+</div>
 
 {{#if _list}}
 <div class="btn-group open">

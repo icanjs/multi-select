@@ -2,21 +2,14 @@
 <script type="text/stache" id="demo" can-autorender>
   <can-import from="multi-select" />
 
-  <!--<multi-select list="{first}" selected="{selected1}"></multi-select>-->
-  <!--{{#each selected1}}-->
+  <!--<multi-select selected-values="{selected2}" list="{list}" value-prop="value" text-prop="text"></multi-select>-->
+  <!--{{#each selected2}}-->
     <!--{{.}},-->
   <!--{{/each}}-->
 
-  <!--<br/><br/>-->
-
-  <!--<multi-select list="{second}" selected="{selected2}"></multi-select>-->
-  <!--{{#each selected2}}-->
-    <!--{{text}},-->
-  <!--{{/each}}-->
-
   <multi-select selected-values="{selected}">
-    {{#each second}}
-    <option value="{{value}}">{{text}}</option>
+    {{#each items}}
+      <option value="{{value}}">{{text}}</option>
     {{/each}}
   </multi-select>
 
@@ -34,16 +27,13 @@
   import $ from "jquery";
 
   $("#demo").viewModel().attr({
-    first:[1, 2, 3],
-    second: [
+    items: [
       {'value': 1, 'text': 'First'},
       {'value': 2, 'text': 'Second'},
       {'value': 3, 'text': 'Third'},
       {'value': 4, 'text': 'Fourth'},
       {'value': 5, 'text': 'Fifth'}
     ],
-    selected: [],
-    selected1: [],
-    selected2: []
+    selected: []
   });
 </script>
