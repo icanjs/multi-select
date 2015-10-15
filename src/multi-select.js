@@ -5,6 +5,39 @@ import template from './template.stache!';
 
 export const VM = can.Map.extend({
   define: {
+    // API:
+    selectAll: {
+      value: false,
+      set(val){
+        if (val === '' || val === 'true' || val === true){
+          return true;
+        }
+        return false;
+      }
+    },
+    selectAllText: {
+      value: 'Select All'
+    },
+    //selectAllValue: {
+    //  value: null
+    //},
+
+    areAllSelected: {
+      value: false,
+      get(){
+        return this.attr('_list.length') === this.attr('selected.length');
+      },
+      set(val){
+        can.batch.start();
+        this.attr('_list').each(item => {
+          item.attr('isSelected', val);
+        });
+        can.batch.stop();
+        return val;
+      }
+    },
+
+
     /**
      * Source list of items for select options passed from parent context.
      */

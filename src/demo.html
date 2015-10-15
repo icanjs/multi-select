@@ -31,8 +31,8 @@
     {{/each}}
   </div>
   
-  <multi-select selected-values="{selectedThings}">
-    <option value="-1">All</option>
+  <multi-select selected-values="{selectedThings}" select-all>
+    <all-option value="-1" >All</all-option>
     {{#each things}}
       <option value="{{value}}">{{text}}</option>
     {{/each}}
