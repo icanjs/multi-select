@@ -86,6 +86,9 @@ export const VM = can.Map.extend({
   toggle(){
     this.attr('isOpened', !this.attr('isOpened'));
   },
+  close(){
+    this.attr('isOpened', false);
+  },
   initList(items){
     if (items){
       this.attr('_list').replace(items);
@@ -103,6 +106,8 @@ export const VM = can.Map.extend({
     this.attr('_list').splice(pos, 1);
   }
 });
+
+
 
 export default can.Component.extend({
   tag: 'multi-select',
@@ -131,9 +136,22 @@ export default can.Component.extend({
 
       this.viewModel.attr('observer', observer);
     },
+
+    /**
+     * Destroy the Mutation Observer when this component is torn down.
+     */
     removed(){
       //stop observing
       this.viewModel.attr('observer').disconnect();
+    },
+
+    '{document} click': function(el, ev){
+      if($(this.element).has(ev.target).length === 0){
+        this.viewModel.close();
+        console.log(ev.target);
+        console.log(this.element);
+      }
+      
     }
   }
 });
