@@ -18,9 +18,9 @@ export const VM = can.Map.extend({
     selectAllText: {
       value: 'Select All'
     },
-    //selectAllValue: {
-    //  value: null
-    //},
+    allSelectedText: {
+      value: 'All Selected'
+    },
 
     areAllSelected: {
       value: false,
@@ -148,8 +148,6 @@ export default can.Component.extend({
     '{document} click': function(el, ev){
       if($(this.element).has(ev.target).length === 0){
         this.viewModel.close();
-        console.log(ev.target);
-        console.log(this.element);
       }
       
     }

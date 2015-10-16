@@ -8,9 +8,13 @@
       can-click="{toggle}">
     <span class="multiselect-selected-text">
       {{#if selected.length}}
-        {{#eq selected.length 1}}
-          {{#if selected.0.text}} {{selected.0.text}} {{else}} {{selected.0}} {{/if}}
-        {{else}} {{selected.length}} selected {{/eq}}
+        {{#if areAllSelected}}
+          {{allSelectedText}}
+        {{else}}
+          {{#eq selected.length 1}}
+            {{#if selected.0.text}} {{selected.0.text}} {{else}} {{selected.0}} {{/if}}
+          {{else}} {{selected.length}} selected {{/eq}}
+        {{/if}}
       {{else}}
         None selected
       {{/if}}
