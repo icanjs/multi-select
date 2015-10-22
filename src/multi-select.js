@@ -15,8 +15,8 @@ export const VM = can.Map.extend({
         if (val === '' || val === 'true' || val === true){
           return true;
         }
-        if (val === 'all'){
-          return 'all';
+        if (val === 'default'){
+          return 'default';
         }
         return false;
       }
@@ -49,7 +49,7 @@ export const VM = can.Map.extend({
      * Option to provide a property name where isSelected should be defined off.
      */
     selectedProp: {
-      value: 'text'
+      value: 'isSelected'
     },
 
 
@@ -128,7 +128,7 @@ export const VM = can.Map.extend({
       items = mapItems(this.attr('list'), this.attr('valueProp'), this.attr('textProp'), this.attr('selectedProp'));
     }
     // Preselect all:
-    if (this.attr('selectAll') === 'all'){
+    if (this.attr('selectAll') === 'default'){
       items.forEach(item => { item.isSelected = true;});
     }
     this.attr('_list').replace(items);
@@ -204,11 +204,14 @@ export function makeArr(arrayLike){
   return [].slice.call(arrayLike);
 }
 export function mapItems(list, valProp, textProp, selectedProp){
+  if (!list || !list.length){
+    return [];
+  }
   return [].map.call(list, function(item){
     return {
       value: item[valProp],
       text: item[textProp],
-      isSelected: item[selectedProp]
+      isSelected: !!item[selectedProp]
     };
   });
 }

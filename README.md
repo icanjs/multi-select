@@ -33,7 +33,7 @@ Using CanJS's built-in support for StealJS, you can now import the module direct
 ## API
 
 - list: a list of items to use if no <option> tags are rendered inside the component.
-- selectAll: show "Select All" option. If value "all" is passed then all options will be preselected.
+- selectAll: show "Select All" option. If value "default" is passed then all options will be preselected.
 - selectAllText: string to be shown for "Select All" option.
 - allSelectedText: string to be shown when all items are selected.
 - valueProp: property name to look up for value.
