@@ -13,7 +13,7 @@
 
     <multi-select selected-values="{selectedItems}">
       {{#each items}}
-        <option value="{{value}}">{{text}}</option>
+        <option value="{{value}}" {{#isSelected}}selected{{/isSelected}}>{{text}}</option>
       {{/each}}
     </multi-select>
   </div>
@@ -26,7 +26,7 @@
       {{/each}}
     </div>
 
-    <multi-select selected-values="{selectedThings}" select-all>
+    <multi-select selected-values="{selectedThings}" select-all="all">
       {{#each things}}
         <option value="{{value}}">{{text}}</option>
       {{/each}}
@@ -44,8 +44,9 @@
     <multi-select list="{things2}"
                   value-prop="id"
                   text-prop="name"
+                  selected-prop="isChecked"
                   selected-values="{selectedThings2}"
-                  select-all="all"></multi-select>
+                  select-all></multi-select>
   </div>
 </script>
 
@@ -59,7 +60,7 @@
   $("#demo").viewModel().attr({
     items: [
       {'value': 1, 'text': 'First'},
-      {'value': 2, 'text': 'Second'},
+      {'value': 2, 'text': 'Second', isSelected: true},
       {'value': 3, 'text': 'Third'},
       {'value': 4, 'text': 'Fourth'},
       {'value': 5, 'text': 'Fifth'}
@@ -73,9 +74,9 @@
       {'value': 5, 'text': 'Thing 5'}
     ],
     things2: [
-      {'id': 1, 'name': 'Thing 1'},
-      {'id': 2, 'name': 'Thing 2'},
-      {'id': 3, 'name': 'Thing 3'}
+      {'id': 1, 'name': 'Thing 1', 'isChecked': true},
+      {'id': 2, 'name': 'Thing 2', 'isChecked': false},
+      {'id': 3, 'name': 'Thing 3', 'isChecked': true}
     ],
     selectedThings: [],
     selectedThings2: []

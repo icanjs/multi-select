@@ -45,6 +45,12 @@ export const VM = can.Map.extend({
     textProp: {
       value: 'text'
     },
+    /**
+     * Option to provide a property name where isSelected should be defined off.
+     */
+    selectedProp: {
+      value: 'text'
+    },
 
 
     areAllSelected: {
@@ -119,7 +125,7 @@ export const VM = can.Map.extend({
   initList(items){
     // If no template content with <option> tags then get items from list:
     if (!items || !items.length){
-      items = mapItems(this.attr('list'), this.attr('valueProp'), this.attr('textProp'));
+      items = mapItems(this.attr('list'), this.attr('valueProp'), this.attr('textProp'), this.attr('selectedProp'));
     }
     // Preselect all:
     if (this.attr('selectAll') === 'all'){
@@ -192,16 +198,17 @@ export function getItems(nodeList){
 }
 export function getItemFromOption(el){
   var $el = $(el);
-  return {value: $el.val(), text: $el.text()};
+  return {value: $el.val(), text: $el.text(), isSelected: $el.is(':selected')};
 }
 export function makeArr(arrayLike){
   return [].slice.call(arrayLike);
 }
-export function mapItems(list, valProp, textProp){
+export function mapItems(list, valProp, textProp, selectedProp){
   return [].map.call(list, function(item){
     return {
       value: item[valProp],
-      text: item[textProp]
+      text: item[textProp],
+      isSelected: item[selectedProp]
     };
   });
 }
