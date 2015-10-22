@@ -6,6 +6,9 @@ import template from './template.stache!';
 export const VM = can.Map.extend({
   define: {
     // API:
+    /**
+     * Option to turn on "Select All" checkbox.
+     */
     selectAll: {
       value: false,
       set(val){
@@ -15,12 +18,31 @@ export const VM = can.Map.extend({
         return false;
       }
     },
+    /**
+     * Option to provide a text of "Select All" checkbox.
+     */
     selectAllText: {
       value: 'Select All'
     },
+    /**
+     * Option to provide a text for label when all items are selected.
+     */
     allSelectedText: {
       value: 'All Selected'
     },
+    /**
+     * Option to provide a property name where value should be retrieved from.
+     */
+    valueProp: {
+      value: 'value'
+    },
+    /**
+     * Option to provide a property name where text should be retrieved from.
+     */
+    textProp: {
+      value: 'text'
+    },
+
 
     areAllSelected: {
       value: false,
@@ -90,10 +112,10 @@ export const VM = can.Map.extend({
     this.attr('isOpened', false);
   },
   initList(items){
-    if (items){
+    if (items && items.length){
       this.attr('_list').replace(items);
     } else if (this.attr('list.length')) {
-      [].push.apply(this.attr('_list'), this.attr('list'));
+      [].push.apply(this.attr('_list'), mapItems(this.attr('list'), this.attr('valueProp'), this.attr('textProp')));
     }
   },
   addItem(item){
@@ -149,7 +171,7 @@ export default can.Component.extend({
       if($(this.element).has(ev.target).length === 0){
         this.viewModel.close();
       }
-      
+
     }
   }
 });
@@ -165,4 +187,12 @@ export function getItemFromOption(el){
 }
 export function makeArr(arrayLike){
   return [].slice.call(arrayLike);
+}
+export function mapItems(list, valProp, textProp){
+  return [].map.call(list, function(item){
+    return new can.Map({
+      value: item[valProp],
+      text: item[textProp]
+    });
+  });
 }

@@ -35,7 +35,18 @@
     {{#each things}}
       <option value="{{value}}">{{text}}</option>
     {{/each}}
-  </multi-select>  
+  </multi-select>
+</div>
+
+<div class="col-sm-3">
+  <div>
+    Selected Things:
+    {{#each selectedThings}}
+      {{.}},
+    {{/each}}
+  </div>
+
+  <multi-select list="{things2}" value-prop="id" text-prop="name" selected-values="{selectedThings}" select-all></multi-select>
 </div>
 
 
@@ -64,6 +75,11 @@
       {'value': 3, 'text': 'Thing 3'},
       {'value': 4, 'text': 'Thing 4'},
       {'value': 5, 'text': 'Thing 5'}
+    ],
+    things2: [
+      {'id': 1, 'name': 'Thing 1'},
+      {'id': 2, 'name': 'Thing 2'},
+      {'id': 3, 'name': 'Thing 3'}
     ],
     selectedThings: []
   });
