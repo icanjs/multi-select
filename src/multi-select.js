@@ -15,6 +15,9 @@ export const VM = can.Map.extend({
         if (val === '' || val === 'true' || val === true){
           return true;
         }
+        if (val === 'all'){
+          return 'all';
+        }
         return false;
       }
     },
@@ -45,7 +48,6 @@ export const VM = can.Map.extend({
 
 
     areAllSelected: {
-      value: false,
       get(){
         return this.attr('_list.length') === this.attr('selected.length');
       },
@@ -111,9 +113,17 @@ export const VM = can.Map.extend({
   close(){
     this.attr('isOpened', false);
   },
+  /**
+   * Main init function for internal _list.
+   */
   initList(items){
+    // If no template content with <option> tags then get items from list:
     if (!items || !items.length){
       items = mapItems(this.attr('list'), this.attr('valueProp'), this.attr('textProp'));
+    }
+    // Preselect all:
+    if (this.attr('selectAll') === 'all'){
+      items.forEach(item => { item.isSelected = true;});
     }
     this.attr('_list').replace(items);
   },

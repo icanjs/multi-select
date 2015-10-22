@@ -3,54 +3,50 @@
   <can-import from="multi-select" />
   <can-import from="bootstrap/dist/css/bootstrap.css!" />
 
-  <!--<multi-select selected-values="{selected2}" list="{list}" value-prop="value" text-prop="text"></multi-select>-->
-  <!--{{#each selected2}}-->
-    <!--{{.}},-->
-  <!--{{/each}}-->
+  <div class="col-sm-3">
+    <div>
+      Selected Items:
+      {{#each selectedItems}}
+        {{.}},
+      {{/each}}
+    </div>
 
-<div class="col-sm-3">
-  <div>
-    Selected Items:
-    {{#each selectedItems}}
-      {{.}},
-    {{/each}}
+    <multi-select selected-values="{selectedItems}">
+      {{#each items}}
+        <option value="{{value}}">{{text}}</option>
+      {{/each}}
+    </multi-select>
   </div>
 
-  <multi-select selected-values="{selectedItems}">
-    {{#each items}}
-      <option value="{{value}}">{{text}}</option>
-    {{/each}}
-  </multi-select>
-</div>
+  <div class="col-sm-3">
+    <div>
+      Selected Things:
+      {{#each selectedThings}}
+        {{.}},
+      {{/each}}
+    </div>
 
-<div class="col-sm-3">
-  <div>
-    Selected Things: 
-    {{#each selectedThings}}
-      {{.}},
-    {{/each}}
-  </div>
-  
-  <multi-select selected-values="{selectedThings}" select-all>
-    {{#each things}}
-      <option value="{{value}}">{{text}}</option>
-    {{/each}}
-  </multi-select>
-</div>
-
-<div class="col-sm-3">
-  <div>
-    Selected Things:
-    {{#each selectedThings2}}
-      {{.}},
-    {{/each}}
+    <multi-select selected-values="{selectedThings}" select-all>
+      {{#each things}}
+        <option value="{{value}}">{{text}}</option>
+      {{/each}}
+    </multi-select>
   </div>
 
-  <multi-select list="{things2}" value-prop="id" text-prop="name" selected-values="{selectedThings2}" select-all></multi-select>
-</div>
+  <div class="col-sm-3">
+    <div>
+      Selected Things:
+      {{#each selectedThings2}}
+        {{.}},
+      {{/each}}
+    </div>
 
-
-  
+    <multi-select list="{things2}"
+                  value-prop="id"
+                  text-prop="name"
+                  selected-values="{selectedThings2}"
+                  select-all="all"></multi-select>
+  </div>
 </script>
 
 <!-- The data for the above template. -->
