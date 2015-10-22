@@ -16,10 +16,10 @@ Using CanJS's built-in support for StealJS, you can now import the module direct
 <multi-select select-all>
   <option value="1">One</option>
   <option value="2">Two</option>
-  <option value="3">Three</option>
+  <option value="3" selected>Three</option>
 </multi-select>
 
-<multi-select select-all selected="{selectedItems}" are-all-selected="{areAllSelected}">
+<multi-select select-all="all" selected="{selectedItems}">
   {{#each items}}
     <option value="{{value}}">{{text}}</option>
   {{/each}}
@@ -31,6 +31,14 @@ Using CanJS's built-in support for StealJS, you can now import the module direct
 
 
 ## API
+
+- list: a list of items to use if no <option> tags are rendered inside the component.
+- selectAll: show "Select All" option. If value "all" is passed then all options will be preselected.
+- selectAllText: string to be shown for "Select All" option.
+- allSelectedText: string to be shown when all items are selected.
+- valueProp: property name to look up for value.
+- textProp: property name to look up for text.
+- selectedProp: property name to look up to check if item should be preselected.
 
 
 ## Contributing
