@@ -112,11 +112,10 @@ export const VM = can.Map.extend({
     this.attr('isOpened', false);
   },
   initList(items){
-    if (items && items.length){
-      this.attr('_list').replace(items);
-    } else if (this.attr('list.length')) {
-      [].push.apply(this.attr('_list'), mapItems(this.attr('list'), this.attr('valueProp'), this.attr('textProp')));
+    if (!items || !items.length){
+      items = mapItems(this.attr('list'), this.attr('valueProp'), this.attr('textProp'));
     }
+    this.attr('_list').replace(items);
   },
   addItem(item){
     this.attr('_list').push(item);
@@ -190,9 +189,9 @@ export function makeArr(arrayLike){
 }
 export function mapItems(list, valProp, textProp){
   return [].map.call(list, function(item){
-    return new can.Map({
+    return {
       value: item[valProp],
       text: item[textProp]
-    });
+    };
   });
 }

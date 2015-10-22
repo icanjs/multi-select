@@ -10,17 +10,17 @@
 
 <div class="col-sm-3">
   <div>
-    Selected Items: 
+    Selected Items:
     {{#each selectedItems}}
       {{.}},
     {{/each}}
   </div>
-  
+
   <multi-select selected-values="{selectedItems}">
     {{#each items}}
       <option value="{{value}}">{{text}}</option>
     {{/each}}
-  </multi-select>  
+  </multi-select>
 </div>
 
 <div class="col-sm-3">
@@ -41,12 +41,12 @@
 <div class="col-sm-3">
   <div>
     Selected Things:
-    {{#each selectedThings}}
+    {{#each selectedThings2}}
       {{.}},
     {{/each}}
   </div>
 
-  <multi-select list="{things2}" value-prop="id" text-prop="name" selected-values="{selectedThings}" select-all></multi-select>
+  <multi-select list="{things2}" value-prop="id" text-prop="name" selected-values="{selectedThings2}" select-all></multi-select>
 </div>
 
 
@@ -81,6 +81,7 @@
       {'id': 2, 'name': 'Thing 2'},
       {'id': 3, 'name': 'Thing 3'}
     ],
-    selectedThings: []
+    selectedThings: [],
+    selectedThings2: []
   });
 </script>
