@@ -217,7 +217,10 @@ export function mapItems(list, valProp, textProp, selectedProp){
   if (!list || !list.length){
     return [];
   }
-  return [].map.call(list, function(item){
+  return [].map.call(list, function(item, n){
+    if (item[valProp] == undefined){
+      console.warn('A ' + valProp + ' property is undefined/null at index ' + n + '.');
+    }
     return {
       value: item[valProp],
       text: item[textProp],
