@@ -213,6 +213,16 @@ export function getItemFromOption(el){
 export function makeArr(arrayLike){
   return [].slice.call(arrayLike);
 }
+
+/**
+ * Maps value, text, and isSelected to attributes that exist on the provided list of data.
+ * @param  {[type]} list         The multi-select list.
+ * @param  {[type]} valProp      The property where the value resides in each list item.
+ * @param  {[type]} textProp     The property where the text / label resides in each list item.
+ * @param  {[type]} selectedProp The property where the isChecked/Boolean resides in each list item.
+ * @return {[type]}              An array of objects that contain value, text, and isSelected from 
+ *                               the original list.
+ */
 export function mapItems(list, valProp, textProp, selectedProp){
   if (!list || !list.length){
     return [];
