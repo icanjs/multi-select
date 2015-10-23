@@ -15,6 +15,13 @@ QUnit.test('getItemFromOption', function(assert) {
   assert.deepEqual(item, {value: 'one', text: 'One', isSelected: false}, 'Should create item from OPTION');
 });
 
+QUnit.test('getItems', function(assert) {
+  var nodeList = $('<div><option value="1">One</option><option value="2" selected>Two</option>123<span>456</span></div>')[0].children,
+    items = MultiSelect.getItems(nodeList);
+
+  assert.deepEqual(items, [{value: '1', text: 'One', isSelected: false},{value: '2', text: 'Two', isSelected: true}], 'Should create items from a node list');
+});
+
 QUnit.test('makeArr', function(assert) {
   assert.ok(true, 'The amounts match');
   var arrayLike = {
