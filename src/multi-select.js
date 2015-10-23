@@ -191,11 +191,17 @@ export default can.Component.extend({
   }
 });
 
+/**
+ * Turns a nodeList list of OPTION elements into an array of data.
+ * @param  {[type]} nodeList The node list containing the options.
+ * @return {[type]}          An array representing the original OPTION elements.
+ */
 export function getItems(nodeList){
   return makeArr(nodeList)
     .filter(node => node.nodeName === "OPTION")
     .map(option => getItemFromOption(option));
 }
+
 /**
  * Makes an object for internal list out of OPTION DOM element.
  * @param {DOMNode} el
@@ -205,6 +211,7 @@ export function getItemFromOption(el){
   var $el = $(el);
   return {value: $el.val(), text: $el.text(), isSelected: $el.is(':selected')};
 }
+
 /**
  * Makes array from array-like structure and returns it.
  * @param arrayLike
