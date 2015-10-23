@@ -196,10 +196,20 @@ export function getItems(nodeList){
     .filter(node => node.nodeName === "OPTION")
     .map(option => getItemFromOption(option));
 }
+/**
+ * Makes an object for internal list out of OPTION DOM element.
+ * @param {DOMNode} el
+ * @returns {{value: *, text: *, isSelected: *}}
+ */
 export function getItemFromOption(el){
   var $el = $(el);
   return {value: $el.val(), text: $el.text(), isSelected: $el.is(':selected')};
 }
+/**
+ * Makes array from array-like structure and returns it.
+ * @param arrayLike
+ * @returns {Array.<T>}
+ */
 export function makeArr(arrayLike){
   return [].slice.call(arrayLike);
 }
