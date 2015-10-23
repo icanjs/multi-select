@@ -33,3 +33,21 @@ QUnit.test('makeArr', function(assert) {
   assert.ok(array instanceof Array, 'Should return type array');
   assert.deepEqual(array, [0,1], 'Should have correct data');
 });
+
+QUnit.test('mapItems', function(assert){
+  var empty = MultiSelect.mapItems();
+  assert.deepEqual([], empty, 'Got en empty array when passing no items.');
+  
+  var data = [
+    {label: 'First', id: 1, checked: false},
+    {label: 'Second', id: 2, checked: false},
+    {label: 'Third', id: 3, checked: true}
+  ];
+  var mapped = MultiSelect.mapItems(data, 'id', 'label', 'checked');
+  var expected = [
+    {isSelected: false, text: 'First', value: 1},
+    {isSelected: false, text: 'Second', value: 2},
+    {isSelected: true, text: 'Third', value: 3},
+  ];
+  assert.deepEqual(mapped, expected, 'Properties were mapped correctly.');
+});
