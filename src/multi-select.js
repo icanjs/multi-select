@@ -93,7 +93,7 @@ export const VM = can.Map.extend({
     },
     selectedValues: {
       get(){
-        return [].map.call(this.attr('selected'), function(item){ return item.value});
+        return [].map.call(this.attr('selected'), function(item){ return item.value;});
       }
     },
     /**
@@ -235,7 +235,7 @@ export function mapItems(list, valProp, textProp, selectedProp){
     return [];
   }
   return [].map.call(list, function(item, n){
-    if (item[valProp] == undefined){
+    if (item[valProp] === undefined || item[valProp] === null){
       console.warn('A ' + valProp + ' property is undefined/null at index ' + n + '.');
     }
     return {

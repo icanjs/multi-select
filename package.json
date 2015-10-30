@@ -7,8 +7,8 @@
     "release:patch": "npm version patch && npm publish",
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
-    "jshint": "jshint src/. --config",
-    "testee": "testee test.html --browsers firefox",
+    "jshint": "jshint src/multi-select.js",
+    "testee": "testee tests/test.html --browsers chrome",
     "test": "npm run jshint && npm run testee",
     "build": "node build.js"
   },
@@ -42,8 +42,12 @@
     "jquery": "^2.1.4"
   },
   "devDependencies": {
+    "jshint": "^2.8.0",
     "steal": "^0.12.0-pre.10",
     "steal-qunit": "^0.1.1",
     "steal-tools": "^0.12.0-pre.5"
+  },
+  "jshintConfig": {
+    "esnext": true
   }
 }
