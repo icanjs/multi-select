@@ -22,11 +22,20 @@ Using CanJS's built-in support for StealJS, you can now import the module direct
   <option value="3" selected>Three</option>
 </multi-select>
 
-<multi-select select-all="all" selected="{selectedItems}">
+<multi-select select-all="all" selected-values="{selectedValues}">
   {{#each items}}
     <option value="{{value}}">{{text}}</option>
   {{/each}}
 </multi-select>
+
+<multi-select list="{items}" selected-items="{selectedItems}"></multi-select>
+
+<multi-select list="{items}"
+              value-prop="id"
+              text-prop="name"
+              selected-prop="isChecked"
+              selected-items="{selectedItems}"
+              select-all></multi-select>
 
 ```
 
@@ -36,18 +45,25 @@ Using CanJS's built-in support for StealJS, you can now import the module direct
 ## API
 
 - list: a list of items to use if no <option> tags are rendered inside the component.
-- selectAll: show "Select All" option. If value "default" is passed then all options will be preselected.
-- selectAllText: string to be shown for "Select All" option.
-- allSelectedText: string to be shown when all items are selected.
-- valueProp: property name to look up for value.
-- textProp: property name to look up for text.
-- selectedProp: property name to look up to check if item should be preselected.
+- selected: an array of _selected items_ as objects with _value and text_ properties.
+- selected-values: an array of _selected values_.
+- selected-items: an array of selected items if items are passed as _list_.
+
+
+### Options:
+
+- select-all: show "Select All" option. If value "default" is passed then all options will be preselected.
+- select-all-text: string to be shown for "Select All" option.
+- all-selected-text: string to be shown when all items are selected.
+- value-prop: property name to look up for value.
+- text-prop: property name to look up for text.
+- selected-prop: property name to look up to check if item should be preselected.
 
 
 ## Contributing
 Pull requests are welcome.
 
-## Author
+## Authors
 
 - [Marshall Thompson](https://github.com/marshallswain)
 - [Ilya Fadeev](https://github.com/ilyavf)
