@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "jshint": "^2.8.0",
+    "ramda": "^0.18.0",
     "steal": "^0.12.3",
     "steal-qunit": "^0.1.1",
     "steal-tools": "^0.12.1",

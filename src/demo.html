@@ -4,12 +4,12 @@
   <can-import from="bootstrap/dist/css/bootstrap.css!" />
 
   <div class="col-sm-3">
-    <div>
+    <p>
       Selected Items:
       {{#each selectedItems}}
         {{.}},
       {{/each}}
-    </div>
+    </p>
 
     <multi-select selected-values="{selectedItems}">
       {{#each items}}
@@ -19,12 +19,12 @@
   </div>
 
   <div class="col-sm-3">
-    <div>
+    <p>
       Selected Things:
       {{#each selectedThings}}
         {{.}},
       {{/each}}
-    </div>
+    </p>
 
     <multi-select selected-values="{selectedThings}" select-all="default">
       {{#each things}}
@@ -33,20 +33,21 @@
     </multi-select>
   </div>
 
-  <div class="col-sm-3">
-    <div>
-      Selected Things:
+  <div class="col-sm-6">
+    <p>
+      Selected Things as &#123;id:value&#125;:
       {{#each selectedThings2}}
-        {{.}},
+        &#123; {{id}}: {{name}} &#125;,
       {{/each}}
-    </div>
+    </p>
 
     <multi-select list="{things2}"
                   value-prop="id"
                   text-prop="name"
                   selected-prop="isChecked"
-                  selected-values="{selectedThings2}"
+                  selected-items="{selectedThings2}"
                   select-all></multi-select>
+
   </div>
 </script>
 

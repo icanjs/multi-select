@@ -1,6 +1,7 @@
 import QUnit from 'steal-qunit';
 import * as MultiSelect from './multi-select';
 import $ from 'jquery';
+import _ from 'ramda';
 
 var vm;
 
@@ -57,7 +58,10 @@ QUnit.test('mapItems', function(assert){
     {isSelected: false, text: 'Second', value: 2},
     {isSelected: true, text: 'Third', value: 3},
   ];
-  assert.deepEqual(mapped, expected, 'Properties were mapped correctly.');
+  assert.deepEqual(
+    _.map(_.pick(['value', 'text', 'isSelected']))(mapped),
+    expected,
+    'Properties were mapped correctly.');
 });
 
 

@@ -85,15 +85,29 @@ export const VM = can.Map.extend({
     },
     /**
      * List contains selected items of this._list
+     * @return {can.List} List of selected items.
      */
     selected: {
       get(){
         return this.attr('_list').filter(item => item.attr('isSelected'));
       }
     },
+    /**
+     * @return {array} Array of selected values.
+     */
     selectedValues: {
       get(){
-        return [].map.call(this.attr('selected'), function(item){ return item.value;});
+        return [].map.call(this.attr('selected'), item => item.attr('value'));
+      }
+    },
+    /**
+     * @return {array} Array of selected items (original from list if passed, or the same as _selected_.
+     */
+    selectedItems: {
+      get(){
+        return [].map.call(this.attr('selected'), item => {
+          return item.attr('_item') || item;
+        });
       }
     },
     /**
@@ -121,17 +135,21 @@ export const VM = can.Map.extend({
   },
   /**
    * Main init function for internal _list.
+   * @param {can.List} items
    */
   initList(items){
+    var mappedItems;
     // If no template content with <option> tags then get items from list:
     if (!items || !items.length){
       items = mapItems(this.attr('list'), this.attr('valueProp'), this.attr('textProp'), this.attr('selectedProp'));
     }
     // Preselect all:
     if (this.attr('selectAll') === 'default'){
-      items.forEach(item => { item.isSelected = true;});
+      mappedItems = items.map(item => { return item.isSelected = true, item; });
+    } else {
+      mappedItems = items;
     }
-    this.attr('_list').replace(items);
+    this.attr('_list').replace(mappedItems);
   },
   addItem(item){
     this.attr('_list').push(item);
@@ -241,7 +259,8 @@ export function mapItems(list, valProp, textProp, selectedProp){
     return {
       value: item[valProp],
       text: item[textProp],
-      isSelected: !!item[selectedProp]
+      isSelected: !!item[selectedProp],
+      _item: item
     };
   });
 }
