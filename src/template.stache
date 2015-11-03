@@ -4,7 +4,7 @@
 
 {{#if _list}}
 <div class="btn-group open">
-  <button type="button" class="multiselect dropdown-toggle btn btn-default" data-toggle="dropdown" title="None selected" aria-expanded="true"
+  <button type="button" class="multiselect dropdown-toggle btn btn-default" title="None selected" aria-expanded="true"
       can-click="{toggle}">
     <span class="multiselect-selected-text">
       {{#if selected.length}}
