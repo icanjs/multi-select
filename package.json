@@ -45,7 +45,8 @@
     "jshint": "^2.8.0",
     "steal": "^0.12.0-pre.10",
     "steal-qunit": "^0.1.1",
-    "steal-tools": "^0.12.0-pre.5"
+    "steal-tools": "^0.12.0-pre.5",
+    "testee": "^0.2.2"
   },
   "jshintConfig": {
     "esnext": true
