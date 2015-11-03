@@ -8,7 +8,7 @@
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
     "jshint": "jshint src/multi-select.js",
-    "testee": "testee tests/test.html --browsers chrome",
+    "testee": "testee tests/test.html --browsers firefox",
     "test": "npm run jshint && npm run testee",
     "build": "node build.js"
   },
@@ -43,9 +43,10 @@
   },
   "devDependencies": {
     "jshint": "^2.8.0",
-    "steal": "^0.12.0-pre.10",
+    "steal": "^0.12.3",
     "steal-qunit": "^0.1.1",
-    "steal-tools": "^0.12.0-pre.5"
+    "steal-tools": "^0.12.1",
+    "testee": "^0.2.2"
   },
   "jshintConfig": {
     "esnext": true

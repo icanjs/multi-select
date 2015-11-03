@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/ilyavf/multi-select.svg?branch=master)](https://travis-ci.org/ilyavf/multi-select)
+[![npm version](https://badge.fury.io/js/multi-select.svg)](https://badge.fury.io/js/multi-select)
+
 # A multi-select component for CanJS
 
 [![NPM](https://nodei.co/npm/multi-select.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/multi-select/)
