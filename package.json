@@ -8,7 +8,7 @@
     "release:minor": "npm version minor && npm publish",
     "release:major": "npm version major && npm publish",
     "jshint": "jshint src/multi-select.js",
-    "testee": "testee tests/test.html --browsers chrome",
+    "testee": "testee tests/test.html --browsers firefox",
     "test": "npm run jshint && npm run testee",
     "build": "node build.js"
   },
