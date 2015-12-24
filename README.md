@@ -9,6 +9,8 @@
 
 Here is a [JSBin] (http://jsbin.com/fevoje/edit?js,output) demo.
 
+![Multi Select Demo](./dist/demo.png)
+
 ## Installation
 ```
 npm install multi-select --save
