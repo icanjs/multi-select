@@ -7,7 +7,7 @@
 
 ## Demo
 
-Here is a [JSBin] (http://jsbin.com/fevoje/edit?js,output) demo.
+Here is a [JSBin](http://jsbin.com/fevoje/edit?js,output) demo.
 
 ![Multi Select Demo](./dist/demo.png)
 
