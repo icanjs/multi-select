@@ -5,6 +5,10 @@
 
 [![NPM](https://nodei.co/npm/multi-select.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/multi-select/)
 
+## Demo
+
+Here is a [JSBin] (http://jsbin.com/fevoje/edit?js,output) demo.
+
 ## Installation
 ```
 npm install multi-select --save
