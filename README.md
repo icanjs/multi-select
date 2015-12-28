@@ -43,7 +43,10 @@ Using CanJS's built-in support for StealJS, you can now import the module direct
               selected-items="{selectedItems}"
               select-all></multi-select>
 
-<multi-select select-all all-selected-value="-1" {^selected-values}="selectedValues">
+<multi-select select-all
+              all-selected-value="-1"
+              {^selected-values}="selectedValues"
+              {^are-all-selected}="areAllSelected">
   <option value="-1">All</option>
   <option value="1">One</option>
   <option value="2">Two</option>
@@ -60,6 +63,7 @@ With all-selected-value set the _selectedValues_ will result in _[-1]_.
 - **selected**: an array of _selected items_ as objects with _value and text_ properties.
 - **selected-values**: an array of _selected values_.
 - **selected-items**: an array of selected items if items are passed as _list_.
+- **are-all-selected**: boolean, true if all options are selected.
 
 
 ### Options:
