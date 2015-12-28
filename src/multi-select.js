@@ -110,11 +110,17 @@ export const VM = can.Map.extend({
      * @return {array} Array of selected values.
      */
     selectedValues: {
-      get(){
+      get: function(){
+        var prevValues = this.prevValues;
         var selectedValues = [].map.call(this.attr('selected'), item => item.attr('value'));
         if (this.attr('areAllSelected') && this.attr('allSelectedValue') !== null){
-          return [this.attr('allSelectedValue')];
+          selectedValues = [this.attr('allSelectedValue')];
         }
+        if (prevValues && deepEqual(prevValues, selectedValues)) {
+          console.log('selectedValues: SAME VALUES!');
+          return prevValues;
+        };
+        this.prevValues = selectedValues;
         return selectedValues;
       }
     },
@@ -289,4 +295,10 @@ export function mapItems(list, valProp, textProp, selectedProp){
       _item: item
     };
   });
+}
+
+export function deepEqual(listA, listB){
+  return listA.length === listB.length && listA.reduce(function(acc, a){
+      return acc && listB.indexOf(a) !== -1;
+    }, true);
 }

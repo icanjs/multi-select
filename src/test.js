@@ -136,3 +136,40 @@ QUnit.test('Test allSelectedValue', function(assert){
       {value: "3", text: 'Three', isSelected: true}
     ], 'Selected Items should exclude the All option');
 });
+
+
+QUnit.test('Test selectedValues to fire a change only for different values', function(assert){
+  var vm = new (can.Map.extend({
+    items: [
+      {id: -1, text: 'All'},
+      {id: 1, text: 'One'},
+      {id: 2, text: 'Two'},
+      {id: 3, text: 'Three'}
+    ],
+    selectedValues: [],
+    selectedItems: []
+  }))();
+
+  var frag = can.stache('<multi-select select-all                 ' +
+    '   all-selected-value="-1"               ' +
+    '   {^selected-values}="selectedValues"   ' +
+    '   {^selected-items}="selectedItems">    ' +
+    '       {{#each items}}<option value="{{id}}" selected>{{text}}</option>{{/each}}' +
+    '</multi-select>')(vm);
+
+  $('#qunit-fixture').append(frag);
+
+  assert.deepEqual(vm.attr('selectedValues').attr(), ['-1'], 'Initially selectedValues should be [-1]');
+
+  var counter = 0;
+  vm.bind('selectedValues', function(val){
+    counter++;
+  });
+
+  $('multi-select:last').viewModel().attr('_list.0.isSelected', false);
+
+  assert.equal(vm.attr('selectedValues.length'), 2, 'selectedValues.length should be changed to 2');
+  assert.equal(counter, 1, 'binding should be called once (counter should be 1)');
+
+});
+
