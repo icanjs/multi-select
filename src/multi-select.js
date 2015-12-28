@@ -34,6 +34,19 @@ export const VM = can.Map.extend({
       value: 'All Selected'
     },
     /**
+     * Option to provide a value for _selectedValues_ when _areAllSelected_ is true.
+     * In this case the option with this value will be filtered out from the _list_,
+     * and this value wrapped in an array will be returned.
+     * ```
+     *    <multi-select select-all all-selected-value="-1" {items}="items" {^selected-values}="selectedValues"></multi-select>
+     *
+     *    vm.attr('selectedValues') will return [-1] in case all options are selected.
+     * ```
+     */
+    allSelectedValue: {
+      value: null
+    },
+    /**
      * Option to provide a property name where value should be retrieved from.
      */
     valueProp: {
@@ -93,11 +106,16 @@ export const VM = can.Map.extend({
       }
     },
     /**
+     * Will return [<allSelectedValue>] if _all-selected-value_ is specified.
      * @return {array} Array of selected values.
      */
     selectedValues: {
       get(){
-        return [].map.call(this.attr('selected'), item => item.attr('value'));
+        var selectedValues = [].map.call(this.attr('selected'), item => item.attr('value'));
+        if (this.attr('areAllSelected') && this.attr('allSelectedValue') !== null){
+          return [this.attr('allSelectedValue')];
+        }
+        return selectedValues;
       }
     },
     /**
@@ -139,6 +157,13 @@ export const VM = can.Map.extend({
    */
   initList(items){
     var mappedItems;
+
+    // filter out allSelectedValue:
+    if (this.attr('allSelectedValue') !== null){
+      var allSelectedValue = this.attr('allSelectedValue');
+      items = items.filter(item => item.value !== allSelectedValue);
+    }
+
     // If no template content with <option> tags then get items from list:
     if (!items || !items.length){
       items = mapItems(this.attr('list'), this.attr('valueProp'), this.attr('textProp'), this.attr('selectedProp'));
@@ -177,6 +202,7 @@ export default can.Component.extend({
 
       // Observe changes of the DOM option list:
       var observer = new MutationObserver(function(mutations) {
+        console.log('MutationObserver!');
         mutations.forEach(function(mutation) {
           getItems(mutation.addedNodes).forEach(option => self.viewModel.addItem(option));
           getItems(mutation.removedNodes).forEach(option => self.viewModel.removeItem(option));

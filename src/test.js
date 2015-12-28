@@ -1,5 +1,6 @@
 import QUnit from 'steal-qunit';
 import * as MultiSelect from './multi-select';
+import 'can/map/define/';
 import $ from 'jquery';
 import _ from 'ramda';
 
@@ -84,4 +85,54 @@ QUnit.test('Select all functionality works.', function(assert){
   assert.equal(vm.attr('selectedValues').length, 0, 'All items were deselected.');
   vm.attr('areAllSelected', true);
   assert.equal(vm.attr('selectedValues').length, 3, 'All items were selected.');
+});
+
+//TODO: fix this!
+QUnit.test('Test MutationObserver NOT IMPLEMENTED', function(assert){
+  var vm = new (can.Map.extend({
+    items: [
+      {id: 1, text: 'One'},
+      {id: 2, text: 'Two'},
+      {id: 3, text: 'Three'}
+    ],
+    selectedValues: []
+  }))();
+
+  var frag = can.stache('<multi-select select-all selected-values="{selectedValues}">{{#each items}}<option value="{{id}}" selected>{{text}}</option>{{/each}}</multi-select>')(vm);
+  $('#qunit-fixture').append(frag);
+  assert.equal(vm.attr('selectedValues.length'), 3, 'There should be three items selected');
+
+  // Dynamically add a new item:
+  vm.attr('items').push({id: 4, text: 'Four'});
+  //assert.equal(vm.attr('selectedValues.length'), 4, 'There should be four items selected');
+});
+
+QUnit.test('Test allSelectedValue', function(assert){
+  var vm = new (can.Map.extend({
+    items: [
+      {id: -1, text: 'All'},
+      {id: 1, text: 'One'},
+      {id: 2, text: 'Two'},
+      {id: 3, text: 'Three'}
+    ],
+    selectedValues: [],
+    selectedItems: []
+  }))();
+
+  var frag = can.stache('<multi-select select-all                 ' +
+                        '   all-selected-value="-1"               ' +
+                        '   {^selected-values}="selectedValues"   ' +
+                        '   {^selected-items}="selectedItems">    ' +
+                        '       {{#each items}}<option value="{{id}}" selected>{{text}}</option>{{/each}}' +
+                        '</multi-select>')(vm);
+
+  $('#qunit-fixture').append(frag);
+
+  assert.deepEqual(vm.attr('selectedValues').attr(), ['-1'], 'Select All should return [-1]');
+  assert.deepEqual(vm.attr('selectedItems').attr(),
+    [
+      {value: "1", text: 'One', isSelected: true},
+      {value: "2", text: 'Two', isSelected: true},
+      {value: "3", text: 'Three', isSelected: true}
+    ], 'Selected Items should exclude the All option');
 });

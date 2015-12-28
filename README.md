@@ -28,7 +28,7 @@ Using CanJS's built-in support for StealJS, you can now import the module direct
   <option value="3" selected>Three</option>
 </multi-select>
 
-<multi-select select-all="all" selected-values="{selectedValues}">
+<multi-select select-all="default" selected-values="{selectedValues}">
   {{#each items}}
     <option value="{{value}}">{{text}}</option>
   {{/each}}
@@ -43,27 +43,34 @@ Using CanJS's built-in support for StealJS, you can now import the module direct
               selected-items="{selectedItems}"
               select-all></multi-select>
 
-```
+<multi-select select-all all-selected-value="-1" {^selected-values}="selectedValues">
+  <option value="-1">All</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3" selected>Three</option>
+</multi-select>
 
-## Usage
+With all-selected-value set the _selectedValues_ will result in _[-1]_.
+```
 
 
 ## API
 
-- list: a list of items to use if no <option> tags are rendered inside the component.
-- selected: an array of _selected items_ as objects with _value and text_ properties.
-- selected-values: an array of _selected values_.
-- selected-items: an array of selected items if items are passed as _list_.
+- **list**: a list of items to use if no <option> tags are rendered inside the component.
+- **selected**: an array of _selected items_ as objects with _value and text_ properties.
+- **selected-values**: an array of _selected values_.
+- **selected-items**: an array of selected items if items are passed as _list_.
 
 
 ### Options:
 
-- select-all: show "Select All" option. If value "default" is passed then all options will be preselected.
-- select-all-text: string to be shown for "Select All" option.
-- all-selected-text: string to be shown when all items are selected.
-- value-prop: property name to look up for value.
-- text-prop: property name to look up for text.
-- selected-prop: property name to look up to check if item should be preselected.
+- **select-all**: show "Select All" option. If value "default" is passed then all options will be preselected.
+- **select-all-text**: string to be shown for "Select All" option.
+- **all-selected-text**: string to be shown when all items are selected.
+- **all-selected-value**: a value to be returned when all options are selected (e.g. if its -1, then selectedValues will result in [-1]).
+- **value-prop**: property name to look up for value.
+- **text-prop**: property name to look up for text.
+- **selected-prop**: property name to look up to check if item should be preselected.
 
 
 ## Contributing
