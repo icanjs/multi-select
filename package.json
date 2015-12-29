@@ -14,18 +14,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://marshallswain@github.com/marshallswain/multi-select.git"
+    "url": "https://github.com/icanjs/multi-select"
   },
   "keywords": [
-    "CanJS",
-    "Stache"
+    "canjs",
+    "stache"
   ],
   "author": "Marshall Thompson",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/marshallswain/multi-select/issues"
+    "url": "https://github.com/icanjs/multi-select/issues"
   },
-  "homepage": "https://github.com/marshallswain/multi-select",
+  "homepage": "https://github.com/icanjs/multi-select",
   "system": {
     "main": "multi-select",
     "npmIgnore": [
