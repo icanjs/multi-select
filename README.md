@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ilyavf/multi-select.svg?branch=master)](https://travis-ci.org/ilyavf/multi-select)
+[![Build Status](https://travis-ci.org/icanjs/multi-select.svg?branch=master)](https://travis-ci.org/icanjs/multi-select)
 [![npm version](https://badge.fury.io/js/multi-select.svg)](https://badge.fury.io/js/multi-select)
 
 # A multi-select component for CanJS
