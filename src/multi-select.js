@@ -117,7 +117,6 @@ export const VM = can.Map.extend({
           selectedValues = [this.attr('allSelectedValue')];
         }
         if (prevValues && deepEqual(prevValues, selectedValues)) {
-          console.log('selectedValues: SAME VALUES!');
           return prevValues;
         }
         this.prevValues = selectedValues;
