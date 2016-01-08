@@ -32,6 +32,13 @@ QUnit.test('getItems', function(assert) {
   assert.deepEqual(items, [{value: '1', text: 'One', isSelected: false},{value: '2', text: 'Two', isSelected: true}], 'Should create items from a node list');
 });
 
+QUnit.test('getItemByValue', function(assert) {
+  var list = new can.List([{value: 1, text: 'One'}, {value:2, text: 'Two'}]),
+    item = MultiSelect.getItemByValue(list, 2);
+
+  assert.equal(item.attr('text'), 'Two', 'Should return item with text Two');
+});
+
 QUnit.test('makeArr', function(assert) {
   assert.ok(true, 'The amounts match');
   var arrayLike = {
@@ -87,8 +94,9 @@ QUnit.test('Select all functionality works.', function(assert){
   assert.equal(vm.attr('selectedValues').length, 3, 'All items were selected.');
 });
 
-//TODO: fix this!
-QUnit.test('Test MutationObserver NOT IMPLEMENTED', function(assert){
+QUnit.test('MutationObserver should listen to dynamically rendered OPTION elements', function(assert){
+  var done = assert.async();
+
   var vm = new (can.Map.extend({
     items: [
       {id: 1, text: 'One'},
@@ -104,7 +112,39 @@ QUnit.test('Test MutationObserver NOT IMPLEMENTED', function(assert){
 
   // Dynamically add a new item:
   vm.attr('items').push({id: 4, text: 'Four'});
-  //assert.equal(vm.attr('selectedValues.length'), 4, 'There should be four items selected');
+
+  setTimeout(function(){
+    assert.equal(vm.attr('selectedValues.length'), 4, 'There should be four items selected');
+    done();
+  }, 0);
+});
+
+QUnit.test('MutationObserver should listen to attribute updates', function(assert){
+  var done = assert.async();
+
+  var vm = new (can.Map.extend({
+    items: [
+      {id: 1, text: 'One', isSelected: false},
+      {id: 2, text: 'Two', isSelected: true},
+      {id: 3, text: 'Three', isSelected: false}
+    ]
+  }))();
+
+  var frag = can.stache('<multi-select select-all   ' +
+    '   {^selected-values}="selectedValues">        ' +
+    '       {{#each items}}<option value="{{id}}" {{#if isSelected}}selected{{/if}}>{{text}}</option>{{/each}}' +
+    '</multi-select>')(vm);
+
+  $('#qunit-fixture').append(frag);
+
+  assert.equal(vm.attr('selectedValues.length'), 1, 'There should be one item selected');
+
+  vm.attr('items.0.isSelected', true);
+
+  setTimeout(function(){
+    assert.equal(vm.attr('selectedValues.length'), 2, 'There should be two items selected');
+    done();
+  },0);
 });
 
 QUnit.test('Test allSelectedValue', function(assert){
@@ -150,7 +190,7 @@ QUnit.test('Test selectedValues to fire a change only for different values', fun
     selectedItems: []
   }))();
 
-  var frag = can.stache('<multi-select select-all                 ' +
+  var frag = can.stache('<multi-select select-all ' +
     '   all-selected-value="-1"               ' +
     '   {^selected-values}="selectedValues"   ' +
     '   {^selected-items}="selectedItems">    ' +

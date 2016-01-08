@@ -207,15 +207,39 @@ export default can.Component.extend({
 
       // Observe changes of the DOM option list:
       var observer = new MutationObserver(function(mutations) {
-        console.log('MutationObserver!');
+        //console.log('MutationObserver! mutations: ', mutations);
         mutations.forEach(function(mutation) {
-          getItems(mutation.addedNodes).forEach(option => self.viewModel.addItem(option));
-          getItems(mutation.removedNodes).forEach(option => self.viewModel.removeItem(option));
+          switch(mutation.type){
+            case 'childList':
+              getItems(mutation.addedNodes).forEach(option => self.viewModel.addItem(option));
+              getItems(mutation.removedNodes).forEach(option => self.viewModel.removeItem(option));
+              break;
+
+            case 'attributes':
+              var attrToProp = {
+                selected: 'isSelected'
+              };
+              var itemValue = mutation.target.value,
+                attrName = mutation.attributeName,
+                propName = attrToProp[attrName],
+                attrValue = mutation.target.getAttribute(attrName);
+
+              if (propName){
+                var item = getItemByValue(self.viewModel.attr('_list'), itemValue);
+                item.attr(propName, (attrValue === null ? false : true));
+                //console.log('- attribute for the item %s: %s=%s %s', itemValue, attrName, attrValue, item.attr(propName));
+              }
+              break;
+          }
         });
       });
 
       // configuration of the observer:
-      var config = { childList: true };
+      var config = {
+        childList: true,
+        attributes: true,
+        subtree: true
+      };
 
       // pass in the target node, as well as the observer options
       observer.observe(target, config);
@@ -300,4 +324,10 @@ export function deepEqual(listA, listB){
   return listA.length === listB.length && listA.reduce(function(acc, a){
       return acc && listB.indexOf(a) !== -1;
     }, true);
+}
+
+export function getItemByValue(list, value){
+  return Array.prototype.reduce.call(list, function(acc, item){
+    return acc || item.attr('value') === value && item;
+  }, false);
 }
