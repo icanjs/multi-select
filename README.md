@@ -24,13 +24,13 @@ Using CanJS's built-in support for StealJS, you can now import the module direct
 
 <multi-select select-all>
   <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3" selected>Three</option>
+  <option value="2" selected>Two</option>
+  <option value="3" disabled>Three</option>
 </multi-select>
 
 <multi-select select-all="default" selected-values="{selectedValues}">
   {{#each items}}
-    <option value="{{value}}">{{text}}</option>
+    <option value="{{value}}" {{#if isSelected}}selected{{/if}}>{{text}}</option>
   {{/each}}
 </multi-select>
 
@@ -74,7 +74,8 @@ With all-selected-value set the _selectedValues_ will result in _[-1]_.
 - **all-selected-value**: a value to be returned when all options are selected (e.g. if its -1, then selectedValues will result in [-1]).
 - **value-prop**: property name to look up for value.
 - **text-prop**: property name to look up for text.
-- **selected-prop**: property name to look up to check if item should be preselected.
+- **selected-prop**: property name to look up to check if an item should be selected.
+- **disabled-prop**: property name to look up to check if an item should be disabled.
 
 
 ## Contributing

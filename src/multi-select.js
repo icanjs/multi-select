@@ -64,6 +64,12 @@ export const VM = can.Map.extend({
     selectedProp: {
       value: 'isSelected'
     },
+    /**
+     * Option to provide a property name where isDisabled should be defined off.
+     */
+    disabledProp: {
+      value: 'isDisabled'
+    },
 
 
     areAllSelected: {
@@ -76,7 +82,9 @@ export const VM = can.Map.extend({
         }
         can.batch.start();
         this.attr('_list').each(item => {
-          item.attr('isSelected', val);
+          if (!item.attr('isDisabled')){
+            item.attr('isSelected', val);
+          }
         });
         can.batch.stop();
         return val;
@@ -171,7 +179,7 @@ export const VM = can.Map.extend({
 
     // If no template content with <option> tags then get items from list:
     if (!items || !items.length){
-      items = mapItems(this.attr('list'), this.attr('valueProp'), this.attr('textProp'), this.attr('selectedProp'));
+      items = mapItems(this.attr('list'), this.attr('valueProp'), this.attr('textProp'), this.attr('selectedProp'), this.attr('disabledProp'));
     }
     // Preselect all:
     if (this.attr('selectAll') === 'default'){
@@ -217,7 +225,8 @@ export default can.Component.extend({
 
             case 'attributes':
               var attrToProp = {
-                selected: 'isSelected'
+                selected: 'isSelected',
+                disabled: 'isDisabled'
               };
               var itemValue = mutation.target.value,
                 attrName = mutation.attributeName,
@@ -282,7 +291,12 @@ export function getItems(nodeList){
  */
 export function getItemFromOption(el){
   var $el = $(el);
-  return {value: $el.val(), text: $el.text(), isSelected: $el.is(':selected')};
+  return {
+    value: $el.val(),
+    text: $el.text(),
+    isSelected: $el.is(':selected'),
+    isDisabled: $el.is(':disabled')
+  };
 }
 
 /**
@@ -303,7 +317,7 @@ export function makeArr(arrayLike){
  * @return {[type]}              An array of objects that contain value, text, and isSelected from 
  *                               the original list.
  */
-export function mapItems(list, valProp, textProp, selectedProp){
+export function mapItems(list, valProp, textProp, selectedProp, disabledProp){
   if (!list || !list.length){
     return [];
   }
@@ -315,6 +329,7 @@ export function mapItems(list, valProp, textProp, selectedProp){
       value: item[valProp],
       text: item[textProp],
       isSelected: !!item[selectedProp],
+      isDisabled: !!item[disabledProp],
       _item: item
     };
   });

@@ -13,7 +13,7 @@
 
     <multi-select selected-values="{selectedItems}">
       {{#each items}}
-        <option value="{{value}}" {{#isSelected}}selected{{/isSelected}}>{{text}}</option>
+        <option value="{{value}}" {{#isSelected}}selected{{/isSelected}} {{#isDisabled}}disabled{{/isDisabled}}>{{text}}</option>
       {{/each}}
     </multi-select>
   </div>
@@ -28,7 +28,7 @@
 
     <multi-select selected-values="{selectedThings}" select-all="default">
       {{#each things}}
-        <option value="{{value}}">{{text}}</option>
+        <option value="{{value}}" {{#isDisabled}}disabled{{/isDisabled}}>{{text}}</option>
       {{/each}}
     </multi-select>
   </div>
@@ -62,7 +62,7 @@
     items: [
       {'value': 1, 'text': 'First', isSelected: false},
       {'value': 2, 'text': 'Second', isSelected: true},
-      {'value': 3, 'text': 'Third'},
+      {'value': 3, 'text': 'Third', isDisabled: true},
       {'value': 4, 'text': 'Fourth'},
       {'value': 5, 'text': 'Fifth'}
     ],

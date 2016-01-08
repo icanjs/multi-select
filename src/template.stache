@@ -36,7 +36,7 @@
       <li class="{{#if isSelected}}checked{{/if}}">
         <a tabindex="{{@index}}">
           <label class="checkbox">
-            <input type="checkbox" {{#if isSelected}}checked{{/if}} can-click="{select .}">{{#if text}} {{text}} {{else}} {{.}} {{/if}}
+            <input type="checkbox" {{#if isSelected}}checked{{/if}} {{#if isDisabled}}disabled{{/if}} can-click="{select .}">{{#if text}} {{text}} {{else}} {{.}} {{/if}}
           </label>
         </a>
       </li>

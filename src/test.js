@@ -22,14 +22,17 @@ QUnit.test('getItemFromOption', function(assert) {
   var option = $('<option value="one">One</option>'),
     item = MultiSelect.getItemFromOption(option[0]);
 
-  assert.deepEqual(item, {value: 'one', text: 'One', isSelected: false}, 'Should create item from OPTION');
+  assert.deepEqual(item, {value: 'one', text: 'One', isSelected: false, isDisabled: false}, 'Should create item from OPTION');
 });
 
 QUnit.test('getItems', function(assert) {
-  var nodeList = $('<div><option value="1">One</option><option value="2" selected>Two</option>123<span>456</span></div>')[0].children,
+  var nodeList = $('<div><option value="1" disabled>One</option><option value="2" selected>Two</option>123<span>456</span></div>')[0].children,
     items = MultiSelect.getItems(nodeList);
 
-  assert.deepEqual(items, [{value: '1', text: 'One', isSelected: false},{value: '2', text: 'Two', isSelected: true}], 'Should create items from a node list');
+  assert.deepEqual(
+    items,
+    [{value: '1', text: 'One', isSelected: false, isDisabled: true},{value: '2', text: 'Two', isSelected: true, isDisabled: false}],
+    'Should create items from a node list');
 });
 
 QUnit.test('getItemByValue', function(assert) {
@@ -56,20 +59,20 @@ QUnit.test('mapItems', function(assert){
   assert.deepEqual([], empty, 'Got en empty array when passing no items.');
   
   var data = [
-    {label: 'First', id: 1, checked: false},
-    {label: 'Second', id: 2, checked: false},
-    {label: 'Third', id: 3, checked: true}
+    {label: 'First', id: 1, checked: false, isDisabled: true},
+    {label: 'Second', id: 2, checked: false, isDisabled: false},
+    {label: 'Third', id: 3, checked: true, isDisabled: false}
   ];
-  var mapped = MultiSelect.mapItems(data, 'id', 'label', 'checked');
+  var mapped = MultiSelect.mapItems(data, 'id', 'label', 'checked', 'isDisabled');
   var expected = [
-    {isSelected: false, text: 'First', value: 1},
-    {isSelected: false, text: 'Second', value: 2},
-    {isSelected: true, text: 'Third', value: 3},
+    {isSelected: false, text: 'First', value: 1, isDisabled: true},
+    {isSelected: false, text: 'Second', value: 2, isDisabled: false},
+    {isSelected: true, text: 'Third', value: 3, isDisabled: false}
   ];
   assert.deepEqual(
-    _.map(_.pick(['value', 'text', 'isSelected']))(mapped),
+    _.map(_.pick(['value', 'text', 'isSelected', 'isDisabled']))(mapped),
     expected,
-    'Properties were mapped correctly.');
+    'Properties should be mapped correctly.');
 });
 
 
@@ -171,9 +174,9 @@ QUnit.test('Test allSelectedValue', function(assert){
   assert.deepEqual(vm.attr('selectedValues').attr(), ['-1'], 'Select All should return [-1]');
   assert.deepEqual(vm.attr('selectedItems').attr(),
     [
-      {value: "1", text: 'One', isSelected: true},
-      {value: "2", text: 'Two', isSelected: true},
-      {value: "3", text: 'Three', isSelected: true}
+      {value: "1", text: 'One', isSelected: true, isDisabled: false},
+      {value: "2", text: 'Two', isSelected: true, isDisabled: false},
+      {value: "3", text: 'Three', isSelected: true, isDisabled: false}
     ], 'Selected Items should exclude the All option');
 });
 
