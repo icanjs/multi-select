@@ -53,8 +53,25 @@ Using CanJS's built-in support for StealJS, you can now import the module direct
   <option value="2">Two</option>
   <option value="3" selected>Three</option>
 </multi-select>
+```
+With all-selected-value the _selectedValues_ will result in _[-1]_.
 
-With all-selected-value set the _selectedValues_ will result in _[-1]_.
+### Event delegation:
+```html
+<multi-select {list}="items" (itemclick)="onItemClick"></multi-select>
+
+<multi-select {list}="items" click-event-name="myevent" (myevent)="onItemClick"></multi-select>
+```
+
+For can-2.2.x and older there will be an additional event triggered on the element and can be captured like this on the parent component with events:
+```javascript
+events: {
+    ' itemclick': function(context, ev, params){
+        console.log('Item was clicked!', params);
+        // -> {value: 5, isSelected: true, selectedValues: [5,6,7]}
+    }
+}
+
 ```
 
 
@@ -65,18 +82,24 @@ With all-selected-value set the _selectedValues_ will result in _[-1]_.
 - **selected-values**: an array of _selected values_.
 - **selected-items**: an array of selected items if items are passed as _list_.
 - **are-all-selected**: boolean, true if all options are selected.
+- **(itemclick)**: the handler will be called with 4 arguments by default:
+ - content,
+ - element,
+ - ev,
+ - params: {value: \<itemValue\>, isSelected: \<boolean\>, selectedValues: \<array of selected values\>}
 
 
 ### Options:
 
-- **select-all**: show "Select All" option. If value "default" is passed then all options will be preselected.
-- **select-all-text**: string to be shown for "Select All" option.
-- **all-selected-text**: string to be shown when all items are selected.
+- **select-all**: show "Select All" option. If value "default" is passed then all options will be preselected. Default: false.
+- **select-all-text**: string to be shown for "Select All" option. Default: 'Select All'.
+- **all-selected-text**: string to be shown when all items are selected. Default: 'All Selected'.
 - **all-selected-value**: a value to be returned when all options are selected (e.g. if its -1, then selectedValues will result in [-1]).
-- **value-prop**: property name to look up for value.
-- **text-prop**: property name to look up for text.
-- **selected-prop**: property name to look up to check if an item should be selected.
-- **disabled-prop**: property name to look up to check if an item should be disabled.
+- **value-prop**: property name to look up for value. Default: 'value'
+- **text-prop**: property name to look up for text. Default: 'text'.
+- **selected-prop**: property name to look up to check if an item should be selected. Default: 'isSelected'.
+- **disabled-prop**: property name to look up to check if an item should be disabled. Default: 'isDisabled'.
+- **click-event-name**: property name to look up to check if an item should be disabled. Default: 'itemclick'.
 
 
 ## Contributing

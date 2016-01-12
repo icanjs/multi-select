@@ -11,7 +11,7 @@
       {{/each}}
     </p>
 
-    <multi-select selected-values="{selectedItems}">
+    <multi-select selected-values="{selectedItems}" (itemclick)="onItemClick">
       {{#each items}}
         <option value="{{value}}" {{#isSelected}}selected{{/isSelected}} {{#isDisabled}}disabled{{/isDisabled}}>{{text}}</option>
       {{/each}}
@@ -80,6 +80,9 @@
       {'id': 3, 'name': 'Thing 3', 'isChecked': true}
     ],
     selectedThings: [],
-    selectedThings2: []
+    selectedThings2: [],
+    onItemClick: function(content, element, ev, params){
+      console.log('EVENT ITEMCLICK: value=%s, isSelected=%s', params.value, params.isSelected);
+    }
   });
 </script>

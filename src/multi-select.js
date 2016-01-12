@@ -70,7 +70,12 @@ export const VM = can.Map.extend({
     disabledProp: {
       value: 'isDisabled'
     },
-
+    /**
+     * Option to provide item click event name. This will be fired on the viewModel or for can-2.2 on both viewModel and element.
+     */
+    clickEventName: {
+      value: 'itemclick'
+    },
 
     areAllSelected: {
       get(){
@@ -157,6 +162,22 @@ export const VM = can.Map.extend({
   },
   select(item){
     item.attr('isSelected', !item.attr('isSelected'));
+    var data = [{
+      value: item.attr('value'),
+      isSelected: item.attr('isSelected'),
+      selectedValues: this.attr('selectedValues')
+    }];
+    var eventName = this.attr('clickEventName');
+    if (this.dispatch){
+      // for can-2.3 and newer:
+      this.dispatch(eventName, data);
+    } else {
+      // for older can versions:
+      // trigger on the viewModel:
+      can.event.dispatch.call(this, eventName, data);
+      // trigger on element to be captured on the parent component with "events: {' itemclick': function(){} }":
+      this.el.trigger(eventName, data);
+    }
   },
   toggle(){
     this.attr('isOpened', !this.attr('isOpened'));
