@@ -39,7 +39,7 @@
   "dependencies": {
     "bootstrap": "^3.3.5",
     "can": "*",
-    "jquery": "^2.1.4"
+    "jquery": "~2.1.4"
   },
   "devDependencies": {
     "jshint": "^2.8.0",
