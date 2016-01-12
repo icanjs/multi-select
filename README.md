@@ -19,6 +19,8 @@ npm install multi-select --save
 
 You can use any of the builds in the dist folder to meet your project needs.
 
+## Usage
+
 Using CanJS's built-in support for StealJS, you can now import the module directly inside your templates.  For example:
 ```html
 <can-import from="multi-select"/>
@@ -61,6 +63,10 @@ With all-selected-value the _selectedValues_ will result in _[-1]_.
 <multi-select {list}="items" (itemclick)="onItemClick"></multi-select>
 
 <multi-select {list}="items" click-event-name="myevent" (myevent)="onItemClick"></multi-select>
+
+var onItemClick = function(context, el, ev, params){
+    console.log('Item was clicked with value=%s and isSelected=%s ', params.value, params.isSelected);
+}
 ```
 
 For can-2.2.x and older there will be an additional event triggered on the element and can be captured like this on the parent component with events:
