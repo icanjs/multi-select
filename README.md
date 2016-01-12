@@ -66,7 +66,7 @@ With all-selected-value the _selectedValues_ will result in _[-1]_.
 For can-2.2.x and older there will be an additional event triggered on the element and can be captured like this on the parent component with events:
 ```javascript
 events: {
-    ' itemclick': function(context, ev, params){
+    'multi-select itemclick': function(context, ev, params){
         console.log('Item was clicked!', params);
         // -> {value: 5, isSelected: true, selectedValues: [5,6,7]}
     }

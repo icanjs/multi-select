@@ -175,7 +175,7 @@ export const VM = can.Map.extend({
       // for older can versions:
       // trigger on the viewModel:
       can.event.dispatch.call(this, eventName, data);
-      // trigger on element to be captured on the parent component with "events: {' itemclick': function(){} }":
+      // trigger DOM event on the element to be captured on the parent component with "events: {'multi-select itemclick': function(){} }":
       this.el.trigger(eventName, data);
     }
   },
