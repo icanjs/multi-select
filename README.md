@@ -3,6 +3,8 @@
 
 # A multi-select component for CanJS
 
+[![Join the chat at https://gitter.im/icanjs/multi-select](https://badges.gitter.im/icanjs/multi-select.svg)](https://gitter.im/icanjs/multi-select?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![NPM](https://nodei.co/npm/multi-select.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/multi-select/)
 
 ## Demo
