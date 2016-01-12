@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/icanjs/multi-select.svg?branch=master)](https://travis-ci.org/icanjs/multi-select)
 [![npm version](https://badge.fury.io/js/multi-select.svg)](https://badge.fury.io/js/multi-select)
+[![Join the chat at https://gitter.im/icanjs/multi-select](https://badges.gitter.im/icanjs/multi-select.svg)](https://gitter.im/icanjs/multi-select?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 # A multi-select component for CanJS
 
