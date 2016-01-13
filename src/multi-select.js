@@ -230,6 +230,7 @@ export default can.Component.extend({
   events: {
     inserted(el, ev){
       var self = this;
+      this.viewModel.el = el;
       this.viewModel.initList(getItems(el.find('option')));
 
       var target = el.find('.orig-options')[0];
