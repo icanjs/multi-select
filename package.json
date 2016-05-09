@@ -1,6 +1,6 @@
 {
   "name": "multi-select",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A multi-select component for CanJS",
   "main": "src/multi-select.js",
   "scripts": {
