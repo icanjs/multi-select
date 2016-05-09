@@ -28,10 +28,19 @@ export const VM = can.Map.extend({
       value: 'Select All'
     },
     /**
-     * Option to provide a text for label when all items are selected.
-     */
+    * Option to provide a text for label when all items are selected. By default,
+    * if only a single value is available in the list, when it's checked it will
+    * show that value in the multi-select's main container.  If you pass a value
+    * in the , it will show that value.
+    */
     allSelectedText: {
-      value: 'All Selected'
+     get(lastSetVal){
+       let list = this.getCurrentList();
+       if (list && list.length === 1 && !lastSetVal) {
+         return this.attr('_list.0.text') || this.attr('list.0.text');
+       }
+       return lastSetVal || 'All Selected';
+     }
     },
     /**
      * Option to provide a value for _selectedValues_ when _areAllSelected_ is true.
@@ -218,6 +227,17 @@ export const VM = can.Map.extend({
       return _item.value === item.value ? i : acc;
     }, -1);
     this.attr('_list').splice(pos, 1);
+  },
+  getCurrentList(){
+    let list = this.attr('list');
+    if (!list.length) {
+      list = this.attr('_list');
+    }
+    return list;
+  },
+  moreThanOneItem(){
+    let list = this.getCurrentList();
+    return list && list.length > 1;
   }
 });
 
@@ -336,7 +356,7 @@ export function makeArr(arrayLike){
  * @param  {[type]} valProp      The property where the value resides in each list item.
  * @param  {[type]} textProp     The property where the text / label resides in each list item.
  * @param  {[type]} selectedProp The property where the isChecked/Boolean resides in each list item.
- * @return {[type]}              An array of objects that contain value, text, and isSelected from 
+ * @return {[type]}              An array of objects that contain value, text, and isSelected from
  *                               the original list.
  */
 export function mapItems(list, valProp, textProp, selectedProp, disabledProp){

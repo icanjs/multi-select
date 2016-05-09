@@ -57,7 +57,7 @@ QUnit.test('makeArr', function(assert) {
 QUnit.test('mapItems', function(assert){
   var empty = MultiSelect.mapItems();
   assert.deepEqual([], empty, 'Got en empty array when passing no items.');
-  
+
   var data = [
     {label: 'First', id: 1, checked: false, isDisabled: true},
     {label: 'Second', id: 2, checked: false, isDisabled: false},
@@ -216,3 +216,21 @@ QUnit.test('Test selectedValues to fire a change only for different values', fun
 
 });
 
+
+QUnit.test('Select All is not visible with only one item in the list.', function(assert){
+  vm = new MultiSelect.VM({
+    list: [
+      {label: 'First', id: 1, checked: false},
+    ]
+  });
+  assert.equal(vm.moreThanOneItem(), false);
+});
+
+QUnit.test('When there is only one item, only the first item shows in the label.', function(assert){
+  vm = new MultiSelect.VM({
+    list: [
+      {text: 'First', id: 1, checked: true},
+    ]
+  });
+  assert.equal(vm.attr('allSelectedText'), 'First');
+});

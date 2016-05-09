@@ -24,13 +24,15 @@
   {{#if isOpened}}
   <ul class="multiselect-container dropdown-menu">
     {{#if selectAll}}
-      <li class="{{#if areAllSelected}}checked{{/if}}">
-        <a tabindex="-1">
-          <label class="checkbox">
-            <input type="checkbox" can-value="{areAllSelected}">{{selectAllText}}
-          </label>
-        </a>
-      </li>
+      {{#if moreThanOneItem}}
+        <li class="{{#if areAllSelected}}checked{{/if}}">
+          <a tabindex="-1">
+            <label class="checkbox">
+              <input type="checkbox" can-value="{areAllSelected}">{{selectAllText}}
+            </label>
+          </a>
+        </li>
+      {{/if}}
     {{/if}}
     {{#each _list}}
       <li class="{{#if isSelected}}checked{{/if}}">

@@ -3,51 +3,69 @@
   <can-import from="multi-select" />
   <can-import from="bootstrap/dist/css/bootstrap.css!" />
 
-  <div class="col-sm-3">
-    <p>
-      Selected Items:
-      {{#each selectedItems}}
-        {{.}},
-      {{/each}}
-    </p>
+  <div>
+    <div class="col-sm-3">
+      <p>
+        Selected Items:
+        {{#each selectedItems}}
+          {{.}},
+        {{/each}}
+      </p>
 
-    <multi-select selected-values="{selectedItems}" (itemclick)="onItemClick">
-      {{#each items}}
-        <option value="{{value}}" {{#isSelected}}selected{{/isSelected}} {{#isDisabled}}disabled{{/isDisabled}}>{{text}}</option>
-      {{/each}}
-    </multi-select>
+      <multi-select selected-values="{selectedItems}">
+        {{#each items}}
+          <option value="{{value}}" {{#isSelected}}selected{{/isSelected}}>{{text}}</option>
+        {{/each}}
+      </multi-select>
+    </div>
+
+    <div class="col-sm-3">
+      <p>
+        Selected Things:
+        {{#each selectedThings}}
+          {{.}},
+        {{/each}}
+      </p>
+
+      <multi-select selected-values="{selectedThings}" select-all="default">
+        {{#each things}}
+          <option value="{{value}}">{{text}}</option>
+        {{/each}}
+      </multi-select>
+    </div>
+
+    <div class="col-sm-6">
+      <p>
+        Selected Things as &#123;id:value&#125;:
+        {{#each selectedThings2}}
+          &#123; {{id}}: {{name}} &#125;,
+        {{/each}}
+      </p>
+
+      <multi-select list="{things2}"
+                    value-prop="id"
+                    text-prop="name"
+                    selected-prop="isChecked"
+                    selected-items="{selectedThings2}"
+                    select-all></multi-select>
+
+    </div>
   </div>
 
-  <div class="col-sm-3">
-    <p>
-      Selected Things:
-      {{#each selectedThings}}
-        {{.}},
-      {{/each}}
-    </p>
-
-    <multi-select selected-values="{selectedThings}" select-all="default">
-      {{#each things}}
-        <option value="{{value}}" {{#isDisabled}}disabled{{/isDisabled}}>{{text}}</option>
-      {{/each}}
-    </multi-select>
-  </div>
-
-  <div class="col-sm-6">
-    <p>
-      Selected Things as &#123;id:value&#125;:
-      {{#each selectedThings2}}
-        &#123; {{id}}: {{name}} &#125;,
-      {{/each}}
-    </p>
-
-    <multi-select list="{things2}"
-                  value-prop="id"
-                  text-prop="name"
-                  selected-prop="isChecked"
-                  selected-items="{selectedThings2}"
-                  select-all></multi-select>
-
+  <div style="padding-top:100px;">
+    <div class="col-sm-3">
+      <p>
+        Selected Items:
+        {{#each singleItemSelected}}
+          {{.}},
+        {{/each}}
+      </p>
+      <multi-select selected-values="{singleItemSelected}">
+        {{#each singleItemList}}
+          <option value="{{value}}" {{#isSelected}}selected{{/isSelected}}>{{text}}</option>
+        {{/each}}
+      </multi-select>
+    </div>
   </div>
 </script>
 
@@ -59,20 +77,19 @@
   import $ from "jquery";
 
   $("#demo").viewModel().attr({
+    singleItemList: [{'value': 1, 'text':'awesome.pdf'}],
+    singleItemSelected: [],
     items: [
-      {'value': 1, 'text': 'First', isSelected: false},
+      {'value': 1, 'text': 'First'},
       {'value': 2, 'text': 'Second', isSelected: true},
-      {'value': 3, 'text': 'Third', isDisabled: true},
+      {'value': 3, 'text': 'Third'},
       {'value': 4, 'text': 'Fourth'},
       {'value': 5, 'text': 'Fifth'}
     ],
     selectedItems: [],
     things: [
       {'value': 1, 'text': 'Thing 1'},
-      {'value': 2, 'text': 'Thing 2'},
-      {'value': 3, 'text': 'Thing 3'},
-      {'value': 4, 'text': 'Thing 4'},
-      {'value': 5, 'text': 'Thing 5'}
+
     ],
     things2: [
       {'id': 1, 'name': 'Thing 1', 'isChecked': true},
@@ -80,9 +97,6 @@
       {'id': 3, 'name': 'Thing 3', 'isChecked': true}
     ],
     selectedThings: [],
-    selectedThings2: [],
-    onItemClick: function(content, element, ev, params){
-      console.log('EVENT ITEMCLICK: value=%s, isSelected=%s', params.value, params.isSelected);
-    }
+    selectedThings2: []
   });
 </script>
