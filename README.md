@@ -108,6 +108,10 @@ events: {
 - **click-event-name**: property name to look up to check if an item should be disabled. Default: 'itemclick'.
 
 
+## Changelog
+
+`0.3.0` - By default, when there is one item in the list, when that item is checked, the allSelectedText value will be the text of the checked item.
+
 ## Contributing
 Pull requests are welcome.
 
@@ -117,4 +121,3 @@ Pull requests are welcome.
 - [Ilya Fadeev](https://github.com/ilyavf)
 
 [![Built with StealJS](./dist/build-with-stealjs.jpg)](http://StealJS.com)
-
