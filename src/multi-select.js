@@ -1,5 +1,6 @@
 import can from 'can';
 import 'can/map/define/';
+import 'can-control-processor-capture';
 import './styles.less!';
 import template from './template.stache!';
 
@@ -306,7 +307,7 @@ export default can.Component.extend({
       this.viewModel.attr('observer').disconnect();
     },
 
-    '{document} click': function(el, ev){
+    '{document} click capture': function(el, ev){
       if($(this.element).has(ev.target).length === 0){
         this.viewModel.close();
       }

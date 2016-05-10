@@ -39,6 +39,7 @@
   "dependencies": {
     "bootstrap": "^3.3.5",
     "can": "*",
+    "can-control-processor-capture": "^1.0.0",
     "jquery": "~2.1.4"
   },
   "devDependencies": {
