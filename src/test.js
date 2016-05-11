@@ -228,7 +228,7 @@ QUnit.test('Select All is not visible with only one item in the list.', function
 
 QUnit.test('When there is only one item, only the first item shows in the label.', function(assert){
   vm = new MultiSelect.VM({
-    list: [
+    _list: [
       {text: 'First', id: 1, checked: true},
     ]
   });
