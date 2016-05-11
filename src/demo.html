@@ -27,9 +27,11 @@
         {{/each}}
       </p>
 
-      <multi-select selected-values="{selectedThings}" select-all="default">
+      <multi-select selected-values="{selectedThings}"
+          select-all="default"
+          all-selected-value="-1">
         {{#each things}}
-          <option value="{{value}}">{{text}}</option>
+          <option value="{{value}}" {{#if isSelected}}selected{{/if}}>{{text}}</option>
         {{/each}}
       </multi-select>
     </div>
@@ -89,7 +91,6 @@
     selectedItems: [],
     things: [
       {'value': 1, 'text': 'Thing 1'},
-
     ],
     things2: [
       {'id': 1, 'name': 'Thing 1', 'isChecked': true},

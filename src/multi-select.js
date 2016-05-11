@@ -36,9 +36,9 @@ export const VM = can.Map.extend({
     */
     allSelectedText: {
      get(lastSetVal){
-       let list = this.getCurrentList();
-       if (list && list.length === 1 && !lastSetVal) {
-         return this.attr('_list.0.text') || this.attr('list.0.text');
+       let list = this.attr('_list');
+       if (list && list.attr('length') === 1 && !lastSetVal) {
+         return this.attr('_list.0.text');
        }
        return lastSetVal || 'All Selected';
      }
@@ -229,15 +229,8 @@ export const VM = can.Map.extend({
     }, -1);
     this.attr('_list').splice(pos, 1);
   },
-  getCurrentList(){
-    let list = this.attr('list');
-    if (!list.length) {
-      list = this.attr('_list');
-    }
-    return list;
-  },
   moreThanOneItem(){
-    let list = this.getCurrentList();
+    let list = this.attr('_list');
     return list && list.length > 1;
   }
 });
